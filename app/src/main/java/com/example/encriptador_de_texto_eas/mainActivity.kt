@@ -5,6 +5,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import kotlin.math.ceil
+class mainActivity {
+}
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -88,7 +91,7 @@ fun encriptadoColumnas(frase: String, columnas: Int): String {
 }
 
 fun desencriptadoColumnas(frase: String, columnas: Int): String {
-    val filas = round(frase.length / columnas.toDouble()).toInt()
+    val filas = ceil(frase.length / columnas.toDouble()).toInt()
     val matriz = Array(filas) { CharArray(columnas) }
     var contador = 0
     for (i in matriz[0].indices) {

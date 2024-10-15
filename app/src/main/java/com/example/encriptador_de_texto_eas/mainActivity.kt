@@ -1,11 +1,17 @@
 package com.example.encriptador_de_texto_eas
 
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.Spinner
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kotlin.math.ceil
+
 class mainActivity {
 }
 
@@ -19,10 +25,43 @@ class MainActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+        val spinner = findViewById<Spinner>(R.id.tiposCifrado)
+        val opcionesEncriptado = arrayOf("Sustitucion", "XOR", "Columna")
+        val adaptador = ArrayAdapter<String>(this, R.layout.spinner, opcionesEncriptado)
+        spinner.adapter = adaptador
+        val cifrar = findViewById<Button>(R.id.cifrar)
+        val descifrar = findViewById<Button>(R.id.descifrar)
+        val capturarTexto = findViewById<TextView>(R.id.capturarTexto)
+        val intento1 = Intent(this, MostrarCifrado::class.java)
+        cifrar.setOnClickListener {
+            if (spinner.selectedItem.toString() == "Sustitucion") {
+                val textoEncriptado = encriptadoSustitucion(capturarTexto.text.toString())
+                intento1.putExtra("texto", textoEncriptado)
+                startActivity(intento1)
+            }
+            if (spinner.selectedItem.toString() == "XOR") {
+                val textoEncriptado = encriptadoXor(capturarTexto.text.toString())
+            }
+            if (spinner.selectedItem.toString() == "Columna") {
+                val textoEncriptado = encriptadoColumnas(capturarTexto.text.toString())
+            }
+        }
+        descifrar.setOnClickListener {
+            if (spinner.selectedItem.toString() == "Sustitucion") {
+                val textoDesencriptado = desencriptarSustitucion(capturarTexto.text.toString())
+            }
+            if (spinner.selectedItem.toString() == "XOR") {
+                val textoDesencriptado = encriptadoXor(capturarTexto.text.toString())
+            }
+            if (spinner.selectedItem.toString() == "Columna") {
+                val textoDesencriptado = desencriptadoColumnas(capturarTexto.text.toString())
+            }
+        }
     }
 }
 
-fun encriptadoSustitucion(frase: String, clave: String): String {
+fun encriptadoSustitucion(frase: String): String {
+    val clave = "rvybslfgujxkhdqznwacpmtieo"
     val alfabeto = "abcdefghijklmnopqrstuvwxyz"
     var fraseEncriptada = ""
     for (i in frase.indices) {
@@ -37,7 +76,8 @@ fun encriptadoSustitucion(frase: String, clave: String): String {
     return fraseEncriptada
 }
 
-fun desencriptarSustitucion(frase: String, clave: String): String {
+fun desencriptarSustitucion(frase: String): String {
+    val clave = "rvybslfgujxkhdqznwacpmtieo"
     val alfabeto = "abcdefghijklmnopqrstuvwxyz"
     var fraseDesencriptada = ""
     for (i in frase.indices) {
@@ -52,7 +92,8 @@ fun desencriptarSustitucion(frase: String, clave: String): String {
     return fraseDesencriptada
 }
 
-fun encriptadoXor(frase: String, clave: String): String {
+fun encriptadoXor(frase: String): String {
+    val clave = "Alejandro Correa"
     var fraseEncriptada = ""
     for (i in frase.indices) {
         val letra = frase[i]
@@ -63,7 +104,8 @@ fun encriptadoXor(frase: String, clave: String): String {
     return fraseEncriptada
 }
 
-fun encriptadoColumnas(frase: String, columnas: Int): String {
+fun encriptadoColumnas(frase: String): String {
+    val columnas = 4
     val textoSinEspacios = frase.replace(" ", "*")
     val longitudTexto = textoSinEspacios.length
     val filas = ceil(longitudTexto / columnas.toDouble()).toInt()
@@ -90,7 +132,8 @@ fun encriptadoColumnas(frase: String, columnas: Int): String {
     return textoCifrado
 }
 
-fun desencriptadoColumnas(frase: String, columnas: Int): String {
+fun desencriptadoColumnas(frase: String): String {
+    val columnas = 4
     val filas = ceil(frase.length / columnas.toDouble()).toInt()
     val matriz = Array(filas) { CharArray(columnas) }
     var contador = 0

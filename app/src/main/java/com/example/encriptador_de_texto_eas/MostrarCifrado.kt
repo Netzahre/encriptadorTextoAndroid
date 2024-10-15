@@ -1,6 +1,7 @@
 package com.example.encriptador_de_texto_eas
 
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +21,15 @@ class MostrarCifrado : AppCompatActivity() {
         val bundle = intent.extras
         val texto = bundle?.getString("texto")
         val mostrar = findViewById<TextView>(R.id.mostrarTexto)
+        val salir = findViewById<Button>(R.id.salir)
+
         mostrar.setText(texto)
+
+        salir.setOnClickListener {
+            //Segun la documentacion esto no es incorrecto, al ser la activity lanzada desde otra
+            //esto simplemente te devuelve a la activity original.
+            finish()
+        }
+
     }
 }

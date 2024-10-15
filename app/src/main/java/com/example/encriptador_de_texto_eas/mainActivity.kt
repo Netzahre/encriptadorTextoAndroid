@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kotlin.math.ceil
+import kotlin.math.floor
 
 class mainActivity {
 }
@@ -32,29 +33,39 @@ class MainActivity : AppCompatActivity() {
         val cifrar = findViewById<Button>(R.id.cifrar)
         val descifrar = findViewById<Button>(R.id.descifrar)
         val capturarTexto = findViewById<TextView>(R.id.capturarTexto)
-        val intento1 = Intent(this, MostrarCifrado::class.java)
+        val actividad2 = Intent(this, MostrarCifrado::class.java)
         cifrar.setOnClickListener {
             if (spinner.selectedItem.toString() == "Sustitucion") {
                 val textoEncriptado = encriptadoSustitucion(capturarTexto.text.toString())
-                intento1.putExtra("texto", textoEncriptado)
-                startActivity(intento1)
+                actividad2.putExtra("texto", textoEncriptado)
+                startActivity(actividad2)
             }
             if (spinner.selectedItem.toString() == "XOR") {
                 val textoEncriptado = encriptadoXor(capturarTexto.text.toString())
+                actividad2.putExtra("texto", textoEncriptado)
+                startActivity(actividad2)
             }
             if (spinner.selectedItem.toString() == "Columna") {
                 val textoEncriptado = encriptadoColumnas(capturarTexto.text.toString())
+                actividad2.putExtra("texto", textoEncriptado)
+                startActivity(actividad2)
             }
         }
         descifrar.setOnClickListener {
             if (spinner.selectedItem.toString() == "Sustitucion") {
                 val textoDesencriptado = desencriptarSustitucion(capturarTexto.text.toString())
+                actividad2.putExtra("texto", textoDesencriptado)
+                startActivity(actividad2)
             }
             if (spinner.selectedItem.toString() == "XOR") {
                 val textoDesencriptado = encriptadoXor(capturarTexto.text.toString())
+                actividad2.putExtra("texto", textoDesencriptado)
+                startActivity(actividad2)
             }
             if (spinner.selectedItem.toString() == "Columna") {
                 val textoDesencriptado = desencriptadoColumnas(capturarTexto.text.toString())
+                actividad2.putExtra("texto", textoDesencriptado)
+                startActivity(actividad2)
             }
         }
     }
@@ -93,7 +104,7 @@ fun desencriptarSustitucion(frase: String): String {
 }
 
 fun encriptadoXor(frase: String): String {
-    val clave = "Alejandro Correa"
+    val clave = "4L3j4nDr0CoRrEa"
     var fraseEncriptada = ""
     for (i in frase.indices) {
         val letra = frase[i]
@@ -105,9 +116,9 @@ fun encriptadoXor(frase: String): String {
 }
 
 fun encriptadoColumnas(frase: String): String {
-    val columnas = 4
     val textoSinEspacios = frase.replace(" ", "*")
     val longitudTexto = textoSinEspacios.length
+    val columnas = textoSinEspacios.length / 2
     val filas = ceil(longitudTexto / columnas.toDouble()).toInt()
     val matriz = Array(filas) { CharArray(columnas) }
     var contador = 0

@@ -109,6 +109,7 @@ fun encriptadoXor(frase: String): String {
     for (i in frase.indices) {
         val letra = frase[i]
         val letraClave = clave[i % clave.length]
+        //chat.toInt esta depreciado, code es la forma correcta
         val letraEncriptada = (letra.code xor letraClave.code).toChar()
         fraseEncriptada += letraEncriptada
     }

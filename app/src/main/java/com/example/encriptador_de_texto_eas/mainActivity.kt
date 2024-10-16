@@ -58,7 +58,7 @@ class MainActivity : AppCompatActivity() {
                 startActivity(actividad2)
             }
             if (spinner.selectedItem.toString() == "XOR") {
-                val textoDesencriptado = encriptadoXor(capturarTexto.text.toString())
+                val textoDesencriptado = desencriptadoXor(capturarTexto.text.toString())
                 actividad2.putExtra("texto", textoDesencriptado)
                 startActivity(actividad2)
             }
@@ -72,8 +72,8 @@ class MainActivity : AppCompatActivity() {
 }
 
 fun encriptadoSustitucion(frase: String): String {
-    val clave = "rvybslfgujxkhdqznwacpmtieo"
-    val alfabeto = "abcdefghijklmnopqrstuvwxyz"
+    val clave = "rèvyábôslf¿gíüujxò!êkhdqúz¡âónwañcùpà?métieìo"
+    val alfabeto = "abcdefghijklmñnopqrstuvwxyzáàâéèêíìóòôúùü!¿?¡"
     var fraseEncriptada = ""
     for (i in frase.indices) {
         val letra = frase[i]
@@ -88,8 +88,8 @@ fun encriptadoSustitucion(frase: String): String {
 }
 
 fun desencriptarSustitucion(frase: String): String {
-    val clave = "rvybslfgujxkhdqznwacpmtieo"
-    val alfabeto = "abcdefghijklmnopqrstuvwxyz"
+    val clave = "rèvyábôslf¿gíüujxò!êkhdqúz¡âónwañcùpà?métieìo"
+    val alfabeto = "abcdefghijklmñnopqrstuvwxyzáàâéèêíìóòôúùü!¿?¡"
     var fraseDesencriptada = ""
     for (i in frase.indices) {
         val letra = frase[i]
@@ -109,11 +109,24 @@ fun encriptadoXor(frase: String): String {
     for (i in frase.indices) {
         val letra = frase[i]
         val letraClave = clave[i % clave.length]
-        //chat.toInt esta depreciado, code es la forma correcta
-        val letraEncriptada = (letra.code xor letraClave.code).toChar()
+        // Add an offset to ensure the result is within a printable range
+        val letraEncriptada = (letra.toInt() xor letraClave.toInt() + 128).toChar()
         fraseEncriptada += letraEncriptada
     }
     return fraseEncriptada
+}
+
+fun desencriptadoXor(fraseEncriptada: String): String {
+    val clave = "4L3j4nDr0CoRrEa"
+    var fraseDesencriptada = ""
+    for (i in fraseEncriptada.indices) {
+        val letraEncriptada = fraseEncriptada[i]
+        val letraClave = clave[i % clave.length]
+        // Reverse the offset applied during encryption
+        val letraOriginal = (letraEncriptada.toInt() xor letraClave.toInt() - 128).toChar()
+        fraseDesencriptada += letraOriginal
+    }
+    return fraseDesencriptada
 }
 
 fun encriptadoColumnas(frase: String): String {
@@ -145,7 +158,7 @@ fun encriptadoColumnas(frase: String): String {
 }
 
 fun desencriptadoColumnas(frase: String): String {
-    val columnas = 4
+    val columnas = frase.length / 2
     val filas = ceil(frase.length / columnas.toDouble()).toInt()
     val matriz = Array(filas) { CharArray(columnas) }
     var contador = 0

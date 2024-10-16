@@ -23,7 +23,7 @@ class MostrarCifrado : AppCompatActivity() {
         val mostrar = findViewById<TextView>(R.id.mostrarTexto)
         val salir = findViewById<Button>(R.id.salir)
 
-        mostrar.setText(texto)
+        mostrar.text = texto
 
         salir.setOnClickListener {
             //Segun la documentacion esto no es incorrecto, al ser la activity lanzada desde otra

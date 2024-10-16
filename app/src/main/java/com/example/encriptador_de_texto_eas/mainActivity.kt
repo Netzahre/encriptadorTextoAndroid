@@ -11,10 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import kotlin.math.ceil
-import kotlin.math.floor
 
-class mainActivity {
-}
+class mainActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -110,7 +108,7 @@ fun encriptadoXor(frase: String): String {
         val letra = frase[i]
         val letraClave = clave[i % clave.length]
         // Add an offset to ensure the result is within a printable range
-        val letraEncriptada = (letra.toInt() xor letraClave.toInt() + 128).toChar()
+        val letraEncriptada = (letra.code xor letraClave.code + 128).toChar()
         fraseEncriptada += letraEncriptada
     }
     return fraseEncriptada
@@ -123,7 +121,7 @@ fun desencriptadoXor(fraseEncriptada: String): String {
         val letraEncriptada = fraseEncriptada[i]
         val letraClave = clave[i % clave.length]
         // Reverse the offset applied during encryption
-        val letraOriginal = (letraEncriptada.toInt() xor letraClave.toInt() - 128).toChar()
+        val letraOriginal = (letraEncriptada.code xor letraClave.code - 128).toChar()
         fraseDesencriptada += letraOriginal
     }
     return fraseDesencriptada

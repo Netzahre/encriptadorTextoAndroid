@@ -57,7 +57,7 @@ class Login : AppCompatActivity() {
         val bd = admin.writableDatabase
         if (usuario.isNotBlank() && password.isNotBlank()) {
             val comprobarUser =
-                bd.rawQuery("SELECT usuario, password FROM Usuarios WHERE usuario=$usuario", null)
+                bd.rawQuery("SELECT usuario, password FROM Usuarios WHERE usuario='${usuario}'", null)
             return try {
                 if (comprobarUser.moveToFirst()) {
                     val passwordBase = comprobarUser.getString(1)
@@ -85,7 +85,7 @@ class Login : AppCompatActivity() {
         val bd = admin.writableDatabase
         if (usuario.isNotBlank() && password.isNotBlank()) {
             val comprobarUser =
-                bd.rawQuery("SELECT usuario, password FROM Usuarios WHERE usuario=$usuario", null)
+                bd.rawQuery("SELECT usuario, password FROM Usuarios WHERE usuario='${usuario}'", null)
             try {
                 if (comprobarUser.moveToFirst()) {
                     mostrarToast("El usuario ya existe")
@@ -116,7 +116,7 @@ class Login : AppCompatActivity() {
         val bd = admin.writableDatabase
         if (usuario.isNotBlank() && password.isNotBlank()) {
             val comprobarUser =
-                bd.rawQuery("SELECT usuario, password FROM Usuarios WHERE usuario=$usuario", null)
+                bd.rawQuery("SELECT usuario, password FROM Usuarios WHERE usuario='${usuario}'", null)
             try {
                 if (comprobarUser.moveToFirst()) {
                     if (comprobarPassword(password)) {
@@ -127,7 +127,7 @@ class Login : AppCompatActivity() {
                         } else {
                             val modificar = ContentValues()
                             modificar.put("password", password)
-                            val cant = bd.update("Usuarios", modificar, "usuario=${usuario}", null)
+                            val cant = bd.update("Usuarios", modificar, "usuario='${usuario}'", null)
                             if (cant == 1) {
                                 mostrarToast("contraseña modificada con exito")
                             } else {
@@ -153,12 +153,12 @@ class Login : AppCompatActivity() {
         val bd = admin.writableDatabase
         if (usuario.isNotBlank() && password.isNotBlank()) {
             val comprobarUser =
-                bd.rawQuery("SELECT usuario, password FROM Usuarios WHERE usuario=$usuario", null)
+                bd.rawQuery("SELECT usuario, password FROM Usuarios WHERE usuario='${usuario}'", null)
             try {
                 if (comprobarUser.moveToFirst()) {
                     val passwordBase = comprobarUser.getString(1)
                     if (passwordBase == password) {
-                        val cant = bd.delete("Usuarios", "usuario=${usuario}", null)
+                        val cant = bd.delete("Usuarios", "usuario='${usuario}'", null)
                         if (cant == 1) {
                             mostrarToast("Usuario borrado con exito")
                         } else {

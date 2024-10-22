@@ -107,7 +107,7 @@ fun encriptadoXor(frase: String): String {
     for (i in frase.indices) {
         val letra = frase[i]
         val letraClave = clave[i % clave.length]
-        // Add an offset to ensure the result is within a printable range
+        // Añade un offset para intentar que si es un caracter no imprimible sea mas probable elija uno imprimible
         val letraEncriptada = (letra.code xor letraClave.code + 128).toChar()
         fraseEncriptada += letraEncriptada
     }
@@ -120,7 +120,7 @@ fun desencriptadoXor(fraseEncriptada: String): String {
     for (i in fraseEncriptada.indices) {
         val letraEncriptada = fraseEncriptada[i]
         val letraClave = clave[i % clave.length]
-        // Reverse the offset applied during encryption
+        // Deshace el offset
         val letraOriginal = (letraEncriptada.code xor letraClave.code - 128).toChar()
         fraseDesencriptada += letraOriginal
     }

@@ -15,7 +15,7 @@
         android:layout_marginTop="55dp"
         android:layout_marginBottom="17dp"
         android:gravity="center"
-        android:text="Tu texto cifrado es:"
+        android:text="Tu texto es:"
         android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="20sp"

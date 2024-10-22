@@ -9,7 +9,7 @@ class SQLiteHelpedAdmin(context: Context, name:String, factory: CursorFactory?, 
 
     override fun onCreate(db: SQLiteDatabase?) {
         if (db != null) {
-            db.execSQL("create table Usuarios(codigo int primary key, contraseña text)")
+            db.execSQL("create table Usuarios(usuario text primary key, password text)")
         }
     }
 

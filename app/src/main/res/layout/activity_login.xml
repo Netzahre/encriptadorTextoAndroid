@@ -20,10 +20,10 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4">
+        app:layout_constraintTop_toBottomOf="@+id/titulo">
 
         <EditText
-            android:id="@+id/editTextText2"
+            android:id="@+id/escUsuario"
             android:layout_width="292dp"
             android:layout_height="82dp"
             android:layout_marginStart="33dp"
@@ -34,13 +34,13 @@
             android:hint="Nombre de usuario"
             android:inputType="text"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toTopOf="@+id/passText"
+            app:layout_constraintBottom_toTopOf="@+id/passTexto"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/UserText" />
+            app:layout_constraintTop_toBottomOf="@+id/UsuarioTexto" />
 
         <EditText
-            android:id="@+id/password"
+            android:id="@+id/escPassword"
             android:layout_width="286dp"
             android:layout_height="82dp"
             android:layout_marginStart="35dp"
@@ -54,23 +54,23 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/UserText" />
+            app:layout_constraintTop_toBottomOf="@+id/UsuarioTexto" />
 
         <TextView
-            android:id="@+id/passText"
+            android:id="@+id/passTexto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="Contraseña"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/password"
+            app:layout_constraintBottom_toTopOf="@+id/escPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextText2" />
+            app:layout_constraintTop_toBottomOf="@+id/escUsuario" />
 
         <TextView
-            android:id="@+id/UserText"
+            android:id="@+id/UsuarioTexto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
@@ -78,7 +78,7 @@
             android:text="Usuario"
             android:textColor="@color/white"
             android:textSize="20sp"
-            app:layout_constraintBottom_toTopOf="@+id/password"
+            app:layout_constraintBottom_toTopOf="@+id/escPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -99,22 +99,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
 
         <Button
-            android:id="@+id/signin"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:layout_weight="1"
-            android:backgroundTint="#089218"
-            android:text="Sign-in"
-            android:textSize="20sp" />
-
-
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/login"
+            android:id="@+id/acceder"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:layout_weight="1"
@@ -122,13 +107,28 @@
             android:text="Log-in"
             android:textSize="20sp" />
 
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/modifypass"
+            android:id="@+id/registro"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_weight="1"
+            android:backgroundTint="#089218"
+            android:text="Sign-in"
+            android:textSize="20sp" />
+
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/modificar"
             android:layout_width="350dp"
             android:layout_height="60dp"
             android:layout_weight="1"
@@ -142,7 +142,7 @@
             android:layout_weight="1" />
 
         <Button
-            android:id="@+id/deleteacc"
+            android:id="@+id/borrar"
             android:layout_width="350dp"
             android:layout_height="60dp"
             android:layout_weight="1"
@@ -153,7 +153,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/titulo"
         android:layout_width="0dp"
         android:layout_height="81dp"
         android:layout_marginStart="52dp"

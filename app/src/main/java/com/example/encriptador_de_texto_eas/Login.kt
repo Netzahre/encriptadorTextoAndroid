@@ -33,19 +33,31 @@ class Login : AppCompatActivity() {
 
         acceder.setOnClickListener {
             if (accederCuenta(textoUser.text.toString(), textoPassword.text.toString(), admin)) {
+                textoUser.setText("")
+                textoPassword.setText("")
                 startActivity(encriptador)
             }
+            textoUser.setText("")
+            textoPassword.setText("")
         }
         registro.setOnClickListener {
             if (crearCuenta(textoUser.text.toString(), textoPassword.text.toString(), admin)) {
+                textoUser.setText("")
+                textoPassword.setText("")
                 startActivity(encriptador)
             }
+            textoUser.setText("")
+            textoPassword.setText("")
         }
         modificar.setOnClickListener {
-            borrarUsuario(textoUser.text.toString(), textoPassword.text.toString(), admin)
+            modificarPassword(textoUser.text.toString(), textoPassword.text.toString(), admin)
+            textoUser.setText("")
+            textoPassword.setText("")
         }
         borrar.setOnClickListener {
             borrarUsuario(textoUser.text.toString(), textoPassword.text.toString(), admin)
+            textoUser.setText("")
+            textoPassword.setText("")
         }
     }
 
@@ -62,6 +74,7 @@ class Login : AppCompatActivity() {
                 if (comprobarUser.moveToFirst()) {
                     val passwordBase = comprobarUser.getString(1)
                     if (passwordBase == password) {
+                        mostrarToast("Acceso exitoso")
                         true;
                     } else {
                         mostrarToast("Usuario o contraseña incorrecto")
